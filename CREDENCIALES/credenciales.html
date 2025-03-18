@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Validación de Empleado</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 50px;
+        }
+        .container {
+            max-width: 400px;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            box-shadow: 2px 2px 12px rgba(0, 0, 0, 0.2);
+        }
+        #resultado {
+            margin-top: 20px;
+            font-weight: bold;
+        }
+        img {
+            max-width: 100px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Validación de Empleado</h2>
+        <p id="resultado">Cargando...</p>
+        <div id="datosEmpleado" style="display:none;">
+            <p><strong>Nombre:</strong> <span id="nombre"></span></p>
+            <p><strong>Cargo:</strong> <span id="cargo"></span></p>
+            <img id="imagen" src="" alt="Imagen del empleado">
+        </div>
+    </div>
+
+    <script>
+        // Simulación de base de datos
+        const empleadosValidos = {
+            "1234": { nombre: "Juan Pérez", cargo: "Gerente", imagen: "sello.png" },
+            "5678": { nombre: "Ana Gómez", cargo: "Secretaria", imagen: "sello.png" },
+            "91011": { nombre: "Carlos Ramírez", cargo: "Contador", imagen: "sello.png" },
+            "121314": { nombre: "Luisa Fernández", cargo: "Técnico", imagen: "sello.png" }
+        };
+
+        // Obtener el parámetro 'empleadoID' de la URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const empleadoID = urlParams.get('empleadoID');
+
+        // Mostrar los datos del empleado si es válido
+        const resultado = document.getElementById("resultado");
+        const datosEmpleado = document.getElementById("datosEmpleado");
+
+        if (empleadosValidos[empleadoID]) {
+            resultado.textContent = "Funcionario válido ✅";
+            resultado.style.color = "green";
+            document.getElementById("nombre").textContent = empleadosValidos[empleadoID].nombre;
+            document.getElementById("cargo").textContent = empleadosValidos[empleadoID].cargo;
+            document.getElementById("imagen").src = empleadosValidos[empleadoID].imagen;
+            datosEmpleado.style.display = "block";
+        } else {
+            resultado.textContent = "Funcionario no encontrado ❌";
+            resultado.style.color = "red";
+            datosEmpleado.style.display = "none";
+        }
+    </script>
+</body>
+</html>
